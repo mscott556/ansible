@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  become: yes
+
+  tasks:
+  - name: apt update
+    apt: upgrade=dist update_cache=yes
+    when: ansible_os_family == "Debian"
