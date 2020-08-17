@@ -1,0 +1,17 @@
+---
+
+- name: Show version & other user level commands
+  hosts: ios
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: Run multiple commands on remote switches
+      ios_command:
+        commands:
+          - show version
+          - show ip int brief
+
+      register: print_output
+
+    - debug: var=print_output.stdout_lines
