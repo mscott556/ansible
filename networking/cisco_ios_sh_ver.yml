@@ -1,7 +1,7 @@
 ---
 
 - name: Backup show version
-  hosts: access
+  hosts: access,l3agg,router
   gather_facts: false
   connection: local
 
@@ -16,4 +16,4 @@
     - debug: var=print_output.stdout_lines
 
     - name: Save output to a file
-      copy: content="{{ print_output.stdout[0] }}" dest="./output/{{ inventory_hostname }}_version.txt"
+      copy: content="{{ print_output.stdout[0] }}" dest="./output/version/{{ inventory_hostname }}_version.txt"

@@ -1,7 +1,7 @@
 ---
 
 - name: Backup running config
-  hosts: access
+  hosts: access,l3agg,router
   gather_facts: false
   connection: local
 

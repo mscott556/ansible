@@ -1,6 +1,6 @@
 ---
 
-- hosts: access
+- hosts: access,l3agg,router
   connection: local
   gather_facts: false
   vars:
