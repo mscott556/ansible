@@ -1,7 +1,7 @@
 ---
 
 - name: Backup running config
-  hosts: ios
+  hosts: access
   gather_facts: false
   connection: local
 
@@ -17,4 +17,4 @@
     - debug: var=print_output.stdout_lines
 
     - name: Save output to a file
-      copy: content="{{ print_output.stdout[0] }}" dest="./output/{{ inventory_hostname }}_running_config.txt"
+      copy: content="{{ print_output.stdout[0] }}" dest="./output/configs/{{ inventory_hostname }}_running_config.txt"

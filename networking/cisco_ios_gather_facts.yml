@@ -8,7 +8,7 @@
     - name: IOS Facts
       register: iosfacts_out
       ios_facts:
-        gather_subset:
-          - "!all"
+        gather_subset: min
+        #subset options = min, config, interfaces, hardware, all
     
     - copy: content="{{ iosfacts_out | to_nice_json }}" dest="output/facts/{{inventory_hostname}}_iosfacts.json"
