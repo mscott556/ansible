@@ -1,0 +1,14 @@
+---
+
+- hosts: access
+  connection: local
+  gather_facts: false
+  vars:
+  tasks:
+    - name: IOS Facts
+      register: iosfacts_out
+      ios_facts:
+        gather_subset:
+          - "!all"
+    
+    - copy: content="{{ iosfacts_out | to_nice_json }}" dest="output/facts/{{inventory_hostname}}_iosfacts.json"

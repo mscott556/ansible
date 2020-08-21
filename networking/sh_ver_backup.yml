@@ -1,7 +1,7 @@
 ---
 
-- name: Backup show version information
-  hosts: ios
+- name: Backup show version
+  hosts: access
   gather_facts: false
   connection: local
 
