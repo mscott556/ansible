@@ -1,0 +1,24 @@
+---
+
+- name: Router Status
+  hosts: router_central
+  gather_facts: false
+  connection: local
+
+  tasks:
+    - name: Run enable level commands
+      ios_command:
+        authorize: yes
+        commands:
+          - show ip interface brief
+          - show ip ospf neighbor
+          - show ip bgp summary
+          - show ip bgp vpnv4 vrf internet summary
+          - show ip route
+
+      register: print_output
+
+    - debug: var=print_output.stdout_lines
+
+    - name: Save output to a file
+      copy: content="{{ print_output.stdout[0] }},{{ print_output.stdout[1] }},{{ print_output.stdout[2] }},{{ print_output.stdout[3] }},{{ print_output.stdout[4] }},{{ print_output.stdout[5] }},{{ print_output.stdout[6] }},{{ print_output.stdout[7] }},{{ print_output.stdout[8] }},{{ print_output.stdout[9] }},{{ print_output.stdout[10] }},{{ print_output.stdout[11] }},{{ print_output.stdout[12] }},{{ print_output.stdout[13] }},{{ print_output.stdout[14] }},{{ print_output.stdout[14] }}" dest="./output/{{ inventory_hostname }}_status.txt"
